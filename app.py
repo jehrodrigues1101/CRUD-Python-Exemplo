@@ -25,20 +25,29 @@ def home():
     dicionario = listar_galaxias()
     return render_template('index.html', dados=dicionario)
 
-@app.route('/about')
-def about():
-    return 'About page'
-
  #Adicionamos a rota de create
-@app.route('/create')
+@app.route('/cadastrar')
 def criar():
-    return render_template("criar.html")
+    return render_template("cadastrar.html")
 
-#Criamos o método para criar as galaxias
-def create_galaxy(nome,estrela,distancia,imagem):
-    galaxias[gerar_id()] = {"nome":nome, "estrelaPrincipal":estrela, "distancia":distancia,"imagem":imagem}
-    return redirect(url_for('index'))
+#Método para criar galaxias
+@app.route('/criar', methods=['GET', 'POST'])
+def criarGalaxia():
+    if request.method == 'POST':
+        nova_galaxia = {}
+        nova_galaxia['nome'] = request.form['nome']
+        nova_galaxia['estrelaPrincipal'] = request.form['estrela']
+        nova_galaxia['distancia'] = request.form['distancia']
+        nova_galaxia['imagem'] = request.form['imagem']
+        
+        id = gerar_id()
+        galaxias[id] = nova_galaxia  # Adiciona a nova galaxia ao dicionario galaxias
 
+        return redirect(url_for('home'))  # Redireciona para a rota 'index'
+
+    else:
+        return render_template('cadastrar.html')
+    
 def listar_galaxias():
     return galaxias
 
@@ -53,20 +62,6 @@ if __name__ == '__main__':
     
 
 
-
-
-
-"""@app.route('/create')
-def criarGalaxia():
-    if request.method == 'POST':
-        galaxias = {}
-        galaxias['nome'] = request.form['nome']
-        galaxias['estrelaPrincipal'] = request.form['estrela']
-        galaxias['distancia']  = request.form['distancia']
-        galaxias['imagem'] = request.form['imagem']
-        return render_template('index.html')
-    else:
-        return render_template('criar.html', id = gerar_id())"""
     
 #print(listar_galaxias())
 
