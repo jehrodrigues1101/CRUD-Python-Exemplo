@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect,url_for
 
 
 app = Flask(__name__)
-
+##TESTE DE EDIÇÂO
 # Dicionário para armazenar os dados temporariamente
 galaxias= {
     1: {
