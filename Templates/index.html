@@ -15,9 +15,9 @@
                     <th scope="col">Id</th>
                     <th scope="col">Nome</th>
                     <th scope="col">Estrela Principal</th>
-                    <th scope="col">Distancia</th>
+                    <th scope="col">Distância</th>
                     <th scope="col">Imagem</th>
-                    <th scope="col">Ação</th>
+                    <th scope="col">Ações</th> <!-- Nova coluna para botões de ação -->
                 </tr>
             </thead>
             <tbody>
@@ -27,10 +27,15 @@
                     <td>{{ galaxia['nome'] }}</td>
                     <td>{{ galaxia['estrelaPrincipal'] }}</td>
                     <td>{{ galaxia['distancia'] }}</td>
-                    <td><img src="{{ galaxia['imagem'] }}" alt="Imagem da Galaxia" style="max-width: 100px;"></td> 
+                    <td><img src="{{ galaxia['imagem'] }}" alt="Imagem da Galáxia" style="max-width: 100px;"></td>
                     <td>
-                        <form action="{{ url_for('update_galaxia',id=id) }}" method="GET">
-                            <button type="submit" class="btn btn-primary mt-3">Update</button>
+                        <!-- Botão Editar -->
+                        <form action="{{ url_for('editar', id=id) }}" method="get" style="display: inline-block;">
+                            <button type="submit" class="btn btn-primary">Editar</button>
+                        </form>
+                        <!-- Botão Deletar -->
+                        <form action="{{ url_for('deletarGalaxia', id=id) }}" method="post" style="display: inline-block;">
+                            <button type="submit" class="btn btn-danger">Deletar</button>
                         </form>
                     </td>
                 </tr>
