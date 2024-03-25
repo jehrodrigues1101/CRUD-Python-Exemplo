@@ -17,6 +17,7 @@
                     <th scope="col">Estrela Principal</th>
                     <th scope="col">Distancia</th>
                     <th scope="col">Imagem</th>
+                    <th scope="col">Ação</th>
                 </tr>
             </thead>
             <tbody>
@@ -26,7 +27,12 @@
                     <td>{{ galaxia['nome'] }}</td>
                     <td>{{ galaxia['estrelaPrincipal'] }}</td>
                     <td>{{ galaxia['distancia'] }}</td>
-                    <td><img src="{{ galaxia['imagem'] }}" alt="Imagem da Galaxia" style="max-width: 100px;"></td>
+                    <td><img src="{{ galaxia['imagem'] }}" alt="Imagem da Galaxia" style="max-width: 100px;"></td> 
+                    <td>
+                        <form action="{{ url_for('update_galaxia',id=id) }}" method="GET">
+                            <button type="submit" class="btn btn-primary mt-3">Update</button>
+                        </form>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF8">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Criação</title>
+</head>
+
+<body>
+    
+    <div class="container">
+        <h1>Atualizar Galaxia</h1>
+        <form action="/update" method="POST">
+
+            <div class="form-group">
+                <label for="nome">ID</label><br>
+                <input type="number" class="form-control" id="id" value = {{id}} required>
+            </div>
+
+            <div class="form-group">
+            <label for="nome">Digite o nome da galaxia</label><br>
+            <input type="text" class="form-control" id="nome" name="nome" value = {{nome}}>
+            </div>
+            
+            <div class="form-group">
+            <label for="estrela">Maior estrela:</label><br>
+            <input type="text" class="form-control"  id="estrela" name="estrela" value = {{estrela}}><br>
+            </div>
+
+            <div class="form-group">
+                <label for="distancia">Distância:</label><br>
+                <input type="text" class="form-control"  id="distancia" name="distancia" value = {{distancia}}><br>
+            </div>
+
+            <div class="form-group">
+                <label for="imagem">Adicione o Link da Imagem:</label><br>
+                <input type="text" class="form-control" id="imagem" name="imagem" value = {{imagem}}><br>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Editar</button>
+        </form>
+    </div>
+
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.4.3/dist/js/bootstrap.bundle.min.js"></script>

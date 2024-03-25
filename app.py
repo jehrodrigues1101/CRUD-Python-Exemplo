@@ -47,6 +47,20 @@ def criarGalaxia():
 
     else:
         return render_template('cadastrar.html')
+
+#Método salvar o Id da galaxia
+@app.route('/galaxy_update/<int:id>')
+def update_galaxia(id):
+        galaxia = retornar_galaxia(id)
+        galaxia['id'] = id
+        return render_template('update.html', **galaxia)
+
+#Função para devolver uma única galaxia para atualização
+def retornar_galaxia(id:int):
+    if id in galaxias.keys():
+        return galaxias[id]
+    else:
+        return {}
     
 def listar_galaxias():
     return galaxias
