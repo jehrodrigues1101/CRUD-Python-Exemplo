@@ -48,22 +48,37 @@ def criarGalaxia():
     else:
         return render_template('cadastrar.html')
 
-#Método salvar o Id da galaxia
-@app.route('/galaxy_update/<int:id>')
-def update_galaxia(id):
-        galaxia = retornar_galaxia(id)
-        galaxia['id'] = id
-        return render_template('update.html', **galaxia)
+#EXCLUSÃO
+##Jéssica
+@app.route('/deletar/<int:id>', methods=['POST'])  # Captura o ID na URL
+def deletarGalaxia(id):
+    if id in galaxias:
+        del galaxias[id]
 
-#Função para devolver uma única galaxia para atualização
-def retornar_galaxia(id:int):
-    if id in galaxias.keys():
-        return galaxias[id]
-    else:
-        return {}
-    
+    return redirect(url_for('home'))
+
+#ATUALIZAÇÃO DE DADOS
+@app.route('/editar/<int:id>', methods=['GET'])
+def editar(id):
+    galaxia = galaxias.get(id)
+    if galaxia:
+        return render_template('editar.html', id=id, galaxia=galaxia)
+    return redirect(url_for('home'))
+
+@app.route('/atualizar/<int:id>', methods=['POST'])
+def atualizar(id):
+    if request.method == 'POST' and id in galaxias:
+        galaxias[id]['nome'] = request.form['nome']
+        galaxias[id]['estrelaPrincipal'] = request.form['estrela']
+        galaxias[id]['distancia'] = request.form['distancia']
+        galaxias[id]['imagem'] = request.form['imagem']
+        return redirect(url_for('home'))
+    return 'Galáxia não encontrada!', 404
+
+
 def listar_galaxias():
     return galaxias
+
 
 #Como não sabemos o posicionamento, geramos um ID para a nova galaxia quando chamado o método
 def gerar_id():
